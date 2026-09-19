@@ -81,7 +81,24 @@ meri-home/
 
 ## 部署
 
-项目已在 `next.config.ts` 中启用静态导出。Cloudflare Pages 可使用以下配置：
+项目已在 `next.config.ts` 中启用静态导出，构建产物可以直接托管在任意静态网站服务上。
+
+### 使用 GitHub Actions 自动部署
+
+仓库内置了 Cloudflare Pages 部署工作流。完成以下一次性设置后，每次推送到 `main` 分支都会自动构建并发布网站，也可以在 GitHub 的 Actions 页面手动运行：
+
+1. 在 Cloudflare Pages 中创建名为 `meri-home` 的项目。
+2. 创建具有 **Cloudflare Pages: Edit** 权限的 API Token，并在 GitHub 仓库的
+   **Settings → Secrets and variables → Actions** 中添加以下 secrets：
+   - `CLOUDFLARE_API_TOKEN`：Cloudflare API Token
+   - `CLOUDFLARE_ACCOUNT_ID`：Cloudflare Account ID
+3. 将代码推送到 `main` 分支，或手动运行 **Deploy website** 工作流。
+
+工作流会使用 Node.js 22 执行 `npm ci` 与 `npm run build`，然后将 `out/` 上传至 Cloudflare Pages。
+
+### 使用 Cloudflare Pages 控制台部署
+
+也可以直接让 Cloudflare Pages 连接 Git 仓库，并使用以下构建配置：
 
 | 配置项 | 值 |
 | --- | --- |
