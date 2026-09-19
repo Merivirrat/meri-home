@@ -1,3 +1,5 @@
+import { sitePath } from "./site-path";
+
 const projects = [
   {
     index: "01",
@@ -85,7 +87,7 @@ export default function Home() {
             );
 
             return project.href ? (
-              <a className="project project-link" href={project.href} key={project.index}>
+              <a className="project project-link" href={sitePath(project.href)} key={project.index}>
                 {content}
               </a>
             ) : (

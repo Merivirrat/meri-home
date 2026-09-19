@@ -81,16 +81,19 @@ meri-home/
 
 ## 部署
 
-项目已在 `next.config.ts` 中启用静态导出。Cloudflare Pages 可使用以下配置：
+项目已在 `next.config.ts` 中启用静态导出，并通过 GitHub Actions 部署到 GitHub Pages。
 
-| 配置项 | 值 |
-| --- | --- |
-| Production branch | `main` |
-| Build command | `npm run build` |
-| Build output directory | `out` |
-| Node.js version | `22` |
+### 使用 GitHub Actions 自动部署
 
-部署后不需要额外的 Node.js 服务器。若新增依赖服务端运行时的 Next.js 功能，请先确认其是否兼容静态导出。
+仓库内置了 GitHub Pages 部署工作流。完成以下一次性设置后，每次推送到 `main` 分支都会自动构建并发布网站，也可以在 GitHub 的 Actions 页面手动运行：
+
+1. 打开 GitHub 仓库的 **Settings → Pages**。
+2. 在 **Build and deployment → Source** 中选择 **GitHub Actions**。
+3. 将代码推送到 `main` 分支，或在 Actions 页面手动运行 **Deploy website to GitHub Pages** 工作流。
+
+工作流会使用 Node.js 22 执行 `npm ci` 与 `npm run build`，再将 `out/` 作为 Pages artifact 发布。部署不需要配置第三方平台或仓库 secrets。
+
+构建时会根据仓库名自动设置站点的 base path，因此普通项目站点（例如 `/meri-home/`）和 `<用户名>.github.io` 仓库都能正确加载页面、图标及 PDF 文件。部署后不需要额外的 Node.js 服务器。
 
 ## 内容说明
 

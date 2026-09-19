@@ -1,3 +1,5 @@
+import { sitePath } from "../site-path";
+
 type DocumentPageProps = {
   kind: string;
   title: string;
@@ -22,10 +24,10 @@ export function DocumentPage({
   return (
     <main className="document-page">
       <header className="site-header document-header">
-        <a className="site-name" href="/" aria-label="返回 Meri 的主页">
+        <a className="site-name" href={sitePath("/")} aria-label="返回 Meri 的主页">
           Meri
         </a>
-        <a className="back-link" href="/#projects">
+        <a className="back-link" href={sitePath("/#projects")}>
           ← 返回讲义与笔记
         </a>
       </header>
@@ -70,7 +72,7 @@ export function DocumentPage({
 
       <footer>
         <p>© 2026 Meri</p>
-        <a href="/">返回主页</a>
+        <a href={sitePath("/")}>返回主页</a>
       </footer>
     </main>
   );
